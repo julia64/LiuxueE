@@ -1,0 +1,32 @@
+[
+    {
+        "place": "北京",
+        "name": "北京大学",
+        "checked": true
+    },
+    {
+        "place": "北京",
+        "name": "清华大学",
+        "checked": true
+    },
+    {
+        "place": "上海",
+        "name": "复旦大学",
+        "checked": true
+    },
+    {
+        "place": "上海",
+        "name": "上海交通大学",
+        "checked": false
+    },
+    {
+        "place": " 湖北",
+        "name": " 华中科技大学",
+        "checked": false
+    },
+    {
+        "place": " 湖北",
+        "name": " 武汉大学",
+        "checked": false
+    },
+]

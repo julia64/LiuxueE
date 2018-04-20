@@ -1,0 +1,26 @@
+[
+    {
+        "name": "电信",
+        "checked": true
+    },
+    {
+        "name": "管院",
+        "checked": true
+    },
+    {
+        "name": "机械",
+        "checked": true
+    },
+    {
+        "name": "材料",
+        "checked": false
+    },
+    {
+        "name": " 能源",
+        "checked": false
+    },
+    {
+        "name": " 同济医学院",
+        "checked": false
+    },
+]
