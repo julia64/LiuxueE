@@ -79,7 +79,9 @@ export default class YourSchool extends Component {
             statusBar = <View style={[styles.statusBar, {backgroundColor: '#2196F3'}]}/>
         }
         return(
-            <View style={GlobalStyles.root_container}>
+            <View
+                style={GlobalStyles.root_container}
+            >
                 {statusBar}
                 {this.renderNavBar()}
                 <View>
@@ -99,6 +101,7 @@ export default class YourSchool extends Component {
                     enableEmptySections={true}
                     initialListSize={10}
                 />
+
             </View>
         )
     }

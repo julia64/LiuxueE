@@ -99,6 +99,7 @@ export default class Grades extends Component{
                     <TextInputLayout style={styles.inputLayout}>
                         <TextInput
                             style={styles.textInput}
+                            keyboardType={'numeric'}
                             placeholder={'分数                                 '}
                         />
                     </TextInputLayout>
@@ -109,6 +110,7 @@ export default class Grades extends Component{
             <View>
                 <TextInputLayout style={styles.inputLayoutGPA}>
                     <TextInput
+                        keyboardType={'numeric'}
                         style={styles.textInput}
                         placeholder={'GPA'}
                     />

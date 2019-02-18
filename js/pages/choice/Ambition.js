@@ -21,15 +21,15 @@ export default class Ambition extends Component{
     constructor(props){
         super(props);
         this.state={
-            word1:'',
-            word2:'',
-            word3:'',
+            YourSchool:'',
+            YourSubject:'',
+            TargetSubject:'',
         }
     }
     render(){
-            let word1 = this.state.word1?this.state.word1:'正在定位...';
-            let word2 = this.state.word2?this.state.word2:'请选择';
-            let word3 = this.state.word3?this.state.word3:'请选择';
+        let YourSchoolWord = this.state.YourSchool?this.state.YourSchool:'正在定位...';
+        let YourSubjectWord = this.state.YourSubject?this.state.YourSubject:'请选择';
+        let TargetSubject = this.state.TargetSubject?this.state.TargetSubject:'请选择';
         return <View style={styles.container}>
             {/*选择在读院校*/}
             <View>
@@ -42,7 +42,7 @@ export default class Ambition extends Component{
                                 ...this.props,
                                 onCallBack:(word)=>{
                                     this.setState({
-                                        word1:word
+                                        YourSchool:word
                                     })
                                 }
                             },
@@ -51,7 +51,7 @@ export default class Ambition extends Component{
                 >
                     <View style={styles.box1}>
                         <Image source={require('../../../res/images/ic_gps.png')} style={{width:25,height:25,margin:8}}/>
-                        <Text style={{color:'black',fontSize:16,}}>{word1}</Text>
+                        <Text style={{color:'black',fontSize:16,}}>{YourSchoolWord}</Text>
                         <Image source={require('../../../res/images/ic_arrow_down.png')} style={{width:16,height:16,position:'absolute',right:10}}/>
                     </View>
                 </TouchableHighlight>
@@ -68,7 +68,7 @@ export default class Ambition extends Component{
                                 ...this.props,
                                 onCallBack:(word)=>{
                                     this.setState({
-                                        word2:word
+                                        YourSubject:word
                                     })
                                 }
                             },
@@ -76,7 +76,7 @@ export default class Ambition extends Component{
                     }}
                 >
                     <View style={styles.box1}>
-                        <Text style={{color:'black',fontSize:16,marginLeft:10}}>{word2}</Text>
+                        <Text style={{color:'black',fontSize:16,marginLeft:10}}>{YourSubjectWord}</Text>
                         <Image source={require('../../../res/images/ic_arrow_down.png')} style={{width:16,height:16,position:'absolute',right:10}}/>
                     </View>
                 </TouchableHighlight>
@@ -98,7 +98,7 @@ export default class Ambition extends Component{
                                 ...this.props,
                                 onCallBack:(word)=>{
                                     this.setState({
-                                        word3:word
+                                        TargetSubject:word
                                     })
                                 }
                             },
@@ -106,7 +106,7 @@ export default class Ambition extends Component{
                     }}
                 >
                     <View style={styles.box1}>
-                        <Text style={{color:'black',fontSize:16,marginLeft:10}}>{word3}</Text>
+                        <Text style={{color:'black',fontSize:16,marginLeft:10}}>{TargetSubject}</Text>
                         <Image source={require('../../../res/images/ic_arrow_down.png')} style={{width:16,height:16,position:'absolute',right:10}}/>
                     </View>
                 </TouchableHighlight>
@@ -114,12 +114,14 @@ export default class Ambition extends Component{
             <View style={styles.button}>
                 <Text
                     onPress={()=>{
+                        console.log(this.state);
                         this.props.navigator.push({
                             component: Grades,
                             params: {
                                 ...this.props,
                             },
                         });
+
                     }}
                     style={styles.continue}
                 >继续</Text>
