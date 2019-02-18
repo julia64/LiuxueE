@@ -4,7 +4,8 @@ import {
     Text,
     TouchableOpacity,
     Dimensions,
-    Image
+    Image,
+    DeviceEventEmitter
 } from 'react-native';
 
 import Picker from 'react-native-picker';
@@ -45,12 +46,14 @@ import area from '../../res/data/area.json';
             onPickerConfirm: pickedValue => {
                 this.setState({
                     pickedValue:pickedValue
-                })
+                });
+                DeviceEventEmitter.emit('PickerText',{data: pickedValue})
             },
             onPickerCancel: pickedValue => {
                 this.setState({
                     pickedValue:'请选择'
                 })
+
             },
             onPickerSelect: pickedValue => {
             }

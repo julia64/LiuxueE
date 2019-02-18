@@ -7,13 +7,20 @@ import {
     Linking,
     Dimensions,
     TextInput,
-    Platform
+    Platform,
+    NativeModules,
+    NativeEventEmitter, DeviceEventEmitter
 } from 'react-native'
 import ModalDropdown from 'react-native-modal-dropdown';
 import CheckBox from 'react-native-check-box'
 import NavigationBar from '../../common/NavigationBar'
 import ViewUtils from "../../utils/ViewUtils";
 import {TextInputLayout} from 'rn-textinputlayout';
+import ServicesLister from "../../base/ServicesListerBase";
+import SendMessageServices from "./SendMessageServices";
+
+const RNBridge = NativeModules.RNBridge;
+const EmailNativeEventEmitter = new NativeEventEmitter(RNBridge);
 
 const {height, width} = Dimensions.get('window');
 
@@ -21,8 +28,8 @@ export default class Grades extends Component{
     constructor(props){
         super(props);
         this.state={
-            text1:'',
-            text2:'',
+            grade:'',
+            gpa:'',
             work:{
                 name:'是否有实习经历',
                 checked:false
@@ -31,7 +38,26 @@ export default class Grades extends Component{
                 name:'是否发表相关论文',
                 checked:false
             },
-        }
+            options:'',
+            YourSchool:'',
+            YourSubject:'',
+            TargetSchool:'',
+            TargetSubject:'',
+        };
+
+        this.lisetr = new ServicesLister('WriteEmail');
+        this.lisetr.addListener();
+        this.sendMessageService = new SendMessageServices(this.lisetr);
+    }
+    componentWillMount(){
+        DeviceEventEmitter.addListener('SchoolText', (data) => {
+            this.setState({
+                YourSchool: data.YourSchool,
+                YourSubject: data.YourSubject,
+                TargetSchool: data.TargetSchool,
+                TargetSubject: data.TargetSubject,
+            })
+        });
     }
     onBackPress() {
         this.props.navigator.pop();
@@ -91,9 +117,11 @@ export default class Grades extends Component{
                         options={['雅思', '托福']}
                         defaultValue={'请选择'}
                         textStyle={{fontSize:16,margin:10}}
-                        onDropdownWillHide={(options)=>this.setState({options:options})}
                         dropdownStyle={{height:85,alignItems:'center',width:80}}
                         dropdownTextStyle={{fontSize:16}}
+                        onSelect={(idx, value) => {
+                            this.setState({options: value});
+                        }}
                     />
                     <Image source={require('../../../res/images/ic_arrow_down.png')} style={{width:16,height:16,position:'absolute',right:width/2+20}}/>
                     <TextInputLayout style={styles.inputLayout}>
@@ -101,6 +129,7 @@ export default class Grades extends Component{
                             style={styles.textInput}
                             keyboardType={'numeric'}
                             placeholder={'分数                                 '}
+                            onChangeText={(text) => this.setState({grade: text})}
                         />
                     </TextInputLayout>
                 </View>
@@ -113,6 +142,7 @@ export default class Grades extends Component{
                         keyboardType={'numeric'}
                         style={styles.textInput}
                         placeholder={'GPA'}
+                        onChangeText={(text) => this.setState({gpa: text})}
                     />
                 </TextInputLayout>
             </View>
@@ -130,12 +160,19 @@ export default class Grades extends Component{
             <View style={styles.button}>
                 <Text
                     onPress={()=>{
+                        console.log(this.state);
+                        let params = this.state;
+                        this.sendMessageService.sendMessage(
+                            params.options, params.grade, params.gpa, params.work.checked,
+                            params.paper.checked, params.YourSchool, params.YourSubject,
+                            params.TargetSchool, params.TargetSubject,
+                            );
                         this.props.navigator.push({
                             component: Grades,
                             params: {
                                 ...this.props,
-                            },
-                        });
+                            }
+                        })
                     }}
                     style={styles.submit}
                 >提交</Text>

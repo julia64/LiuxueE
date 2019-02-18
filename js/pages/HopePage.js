@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 import NavigationBar from '../common/NavigationBar'
 import Ambition from './choice/Ambition'
-import Grades from './choice/Grades'
 
 const {height, width} = Dimensions.get('window');
 
