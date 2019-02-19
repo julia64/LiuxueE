@@ -20,11 +20,6 @@ import PickerText from '../../common/PickerText'
 import ModalDropdown from 'react-native-modal-dropdown';
 import CheckBox from 'react-native-check-box'
 import {TextInputLayout} from 'rn-textinputlayout';
-import ServicesLister from "../../base/ServicesListerBase";
-import SendMessageServices from "./SendMessageServices";
-
-const RNBridge = NativeModules.RNBridge;
-const EmailNativeEventEmitter = new NativeEventEmitter(RNBridge);
 
 const {height, width} = Dimensions.get('window');
 
@@ -48,9 +43,6 @@ export default class Ambition extends Component{
             },
             options:'',
         };
-        this.lisetr = new ServicesLister('WriteEmail');
-        this.lisetr.addListener();
-        this.sendMessageService = new SendMessageServices(this.lisetr);
     }
     componentWillMount(){
         DeviceEventEmitter.addListener('PickerText', (data) => {
@@ -62,6 +54,35 @@ export default class Ambition extends Component{
     _onClick(data){
         data.checked=!data.checked;
     }
+
+    sendMessage = (options, grade, gpa, work, paper, YourSchool, YourSubject, TargetSchool, TargetSubject, callback: () => (data)) => {
+        let major = (YourSubject === TargetSubject) ? 1 : 0;
+
+        fetch('http://just-go.cn:8002/result', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                options: options,
+                gpa: gpa,
+                work: (work === true) ? 1 : 0,
+                paper: (paper === true) ? 1 : 0,
+                major: major,
+            }),
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+
+                console.log(responseJson)
+
+            })
+            .catch((error) =>{
+                console.error(error);
+            });
+    };
+
     renderCheckBox(data){
         let leftText=data.name;
         return (
@@ -173,13 +194,13 @@ export default class Ambition extends Component{
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <ModalDropdown
                             style={styles.dropDown}
-                            options={['雅思', '托福']}
+                            options={['托福', '雅思']}
                             defaultValue={'请选择'}
                             textStyle={{fontSize:16,margin:10}}
                             dropdownStyle={{height:85,alignItems:'center',width:80}}
                             dropdownTextStyle={{fontSize:16}}
                             onSelect={(idx, value) => {
-                                this.setState({options: value});
+                                this.setState({options: idx});
                             }}
                         />
                         <Image source={require('../../../res/images/ic_arrow_down.png')} style={{width:16,height:16,position:'absolute',right:width/2+20}}/>
@@ -221,7 +242,7 @@ export default class Ambition extends Component{
                         onPress={()=>{
                             console.log(this.state);
                             let params = this.state;
-                            this.sendMessageService.sendMessage(
+                            this.sendMessage(
                                 params.options, params.grade, params.gpa, params.work.checked,
                                 params.paper.checked, params.YourSchool, params.YourSubject,
                                 params.TargetSchool, params.TargetSubject,
@@ -296,8 +317,4 @@ const styles=StyleSheet.create({
     container: {
         marginBottom: 60
     },
-    button: {
-
-
-    }
 });
