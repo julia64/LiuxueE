@@ -4,12 +4,12 @@
         "checked": true
     },
     {
-        "name": "管院",
-        "checked": true
+        "name": "公共管理",
+        "checked": false
     },
     {
         "name": "机械",
-        "checked": true
+        "checked": false
     },
     {
         "name": "材料",
@@ -20,7 +20,95 @@
         "checked": false
     },
     {
-        "name": " 同济医学院",
+        "name":  "临床医学",
         "checked": false
     },
+   {
+        "name":  "人文",
+        "checked":  false
+    } ,
+    {
+        "name":"法学",
+        "checked":  false
+    },
+    {
+        "name":"数学",
+        "checked":  false
+    },
+    {
+        "name":"物理",
+        "checked":  false
+    },
+    {
+        "name":"化学",
+        "checked":  false
+    },
+    {
+        "name":"金融",
+        "checked":  false
+    },
+    {
+        "name":"管理",
+        "checked":  false
+    },
+    {
+        "name":"建筑",
+        "checked":  false
+    },
+    {
+        "name":"生物",
+        "checked":  false
+    },
+    {
+        "name":"光电",
+        "checked":  false
+    },
+    {
+        "name":"计算机",
+        "checked":  false
+    },
+    {
+        "name":"环境",
+        "checked":  false
+    },
+   {
+        "name":"软件",
+        "checked":  false
+    },
+    {
+        "name":"农学",
+        "checked":  false
+    },
+    {
+        "name":"电气",
+        "checked":  false
+    },
+    {
+        "name":"新闻",
+        "checked":  false
+    },
+    {
+        "name":"船海",
+        "checked":  false
+    },
+    {
+        "name":"土木",
+      "checked": false
+    },
+    {
+        "name":"药学",
+        "checked": false
+    },
+    {
+        "name":"外语",
+        "checked": false
+    },
+    {
+        "name":"社会工作",
+        "checked": false
+    },
+    {
+        "name":"营销",
+        "checked": false
+    }
 ]

@@ -12,10 +12,10 @@ import {StyleSheet,
 } from "react-native";
 import ViewUtils from '../../utils/ViewUtils'
 import GlobalStyles from '../../../res/styles/GlobalStyles'
-import CNschool from '../../../res/data/CNschool'
+import school from '../../../res/data/school'
 import RepositoryCell from '../../common/RepositoryCell'
 
-export default class YourSchool extends Component {
+export default class NewSchool extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,14 +31,13 @@ export default class YourSchool extends Component {
     }
     loadData(){
             this.setState({
-                dataSource:this.getDataSource(CNschool)
+                dataSource:this.getDataSource(school)
             });
     }
     getDataSource(items){
         return this.state.dataSource.cloneWithRows(items);
     }
     onBackPress() {
-        this.refs.input.blur();
         this.props.navigator.pop();
     }
     renderNavBar() {
@@ -79,21 +78,10 @@ export default class YourSchool extends Component {
             statusBar = <View style={[styles.statusBar, {backgroundColor: '#2196F3'}]}/>
         }
         return(
-            <View
-                style={GlobalStyles.root_container}
-            >
+            <View style={GlobalStyles.root_container}>
                 {statusBar}
                 {this.renderNavBar()}
-                <View>
-                    <TouchableOpacity style={{flexDirection:'row',alignItems:'center',}}>
-                            <Image
-                                source={require('../../../res/images/ic_gps.png')}
-                                style={{height:24,width:24,tintColor:'#2196F3',marginLeft:10,alignItems:'center'}}
-                            />
-                            <Text style={styles.search}>正在定位...</Text>
-                     </TouchableOpacity>
-                    <View style={{height: 0.8,backgroundColor: 'darkgray'}}/>
-                </View>
+
                 <ListView
                     dataSource={this.state.dataSource}
                     renderRow={(rowData,sectionId,rowId)=>{return this._renderRow(rowData,sectionId,rowId)}}
@@ -101,7 +89,6 @@ export default class YourSchool extends Component {
                     enableEmptySections={true}
                     initialListSize={10}
                 />
-
             </View>
         )
     }
@@ -131,6 +118,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         borderRadius: 3,
         opacity: 0.7,
+        color: 'white'
     },
     title: {
         fontSize: 18,

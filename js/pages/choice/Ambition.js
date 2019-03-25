@@ -14,12 +14,14 @@ import {
     NativeModules,
     NativeEventEmitter,
 } from 'react-native'
-import YourSchool from '../choice/YourSchool'
 import YourSubject from '../choice/YourSubject'
+import NewSchool from './NewSchool'
 import PickerText from '../../common/PickerText'
+import OldSchool from './OldSchool'
 import ModalDropdown from 'react-native-modal-dropdown';
 import CheckBox from 'react-native-check-box'
 import {TextInputLayout} from 'rn-textinputlayout';
+import SchoolMatch from '../../../res/data/SchoolMatch.json'
 
 const {height, width} = Dimensions.get('window');
 
@@ -50,13 +52,25 @@ export default class Ambition extends Component{
                 TargetSchool: data.data
             })
         });
+        DeviceEventEmitter.addListener('OldSchool', (data) => {
+            this.setState({
+                YourSchool: data.data
+            })
+        });
     }
-    _onClick(data){
+    static _onClick(data){
         data.checked=!data.checked;
     }
 
     sendMessage = (options, grade, gpa, work, paper, YourSchool, YourSubject, TargetSchool, TargetSubject, callback: () => (data)) => {
         let major = (YourSubject === TargetSubject) ? 1 : 0;
+
+        let key = 0;
+        SchoolMatch.forEach(function (v,i) {
+            if (v.school === YourSchool) {
+                key = v.key;
+            }
+        });
 
         fetch('http://just-go.cn:8002/result', {
             method: 'POST',
@@ -65,11 +79,14 @@ export default class Ambition extends Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                options: options,
-                gpa: gpa,
-                work: (work === true) ? 1 : 0,
-                paper: (paper === true) ? 1 : 0,
-                major: major,
+                Background: key,
+                IELTS: options,
+                GPA: gpa,
+                EXP_WORK: (work === true) ? 1 : 0,
+                EXP_EXCHANGE: (paper === true) ? 1 : 0,
+                TARGET: TargetSchool,
+                TOFEL: !options,
+                MAJOR: major,
             }),
         })
             .then((response) => response.json())
@@ -103,35 +120,13 @@ export default class Ambition extends Component{
     }
 
     render(){
-        let YourSchoolWord = this.state.YourSchool?this.state.YourSchool:'正在定位...';
         let YourSubjectWord = this.state.YourSubject?this.state.YourSubject:'请选择';
         let TargetSubject = this.state.TargetSubject?this.state.TargetSubject:'请选择';
         return (
             <ScrollView style={styles.container}>
                 {/*选择在读院校*/}
                 <View>
-                    <Text style={styles.word}>选择你的在读院校</Text>
-                    <TouchableHighlight
-                        onPress={()=>{
-                            this.props.navigator.push({
-                                component: YourSchool,
-                                params: {
-                                    ...this.props,
-                                    onCallBack:(word)=>{
-                                        this.setState({
-                                            YourSchool:word
-                                        })
-                                    }
-                                },
-                            });
-                        }}
-                    >
-                        <View style={styles.box1}>
-                            <Image source={require('../../../res/images/ic_gps.png')} style={{width:25,height:25,margin:8}}/>
-                            <Text style={{color:'black',fontSize:16,}}>{YourSchoolWord}</Text>
-                            <Image source={require('../../../res/images/ic_arrow_down.png')} style={{width:16,height:16,position:'absolute',right:10}}/>
-                        </View>
-                    </TouchableHighlight>
+                    <OldSchool/>
                 </View>
 
                 {/*选择在读专业*/}
@@ -161,7 +156,27 @@ export default class Ambition extends Component{
 
                 {/*选择目标院校*/}
                 <View>
-                    <PickerText/>
+                    <Text style={styles.word}>选择你的目标院校</Text>
+                    <TouchableHighlight
+                        onPress={()=>{
+                            this.props.navigator.push({
+                                component: NewSchool,
+                                params: {
+                                    ...this.props,
+                                    onCallBack:(word)=>{
+                                        this.setState({
+                                            TargetSchool:word
+                                        })
+                                    }
+                                },
+                            });
+                        }}
+                    >
+                        <View style={styles.box1}>
+                            <Text style={{color:'black',fontSize:16,marginLeft:10}}>{YourSubjectWord}</Text>
+                            <Image source={require('../../../res/images/ic_arrow_down.png')} style={{width:16,height:16,position:'absolute',right:10}}/>
+                        </View>
+                    </TouchableHighlight>
                 </View>
 
                 {/*选择目标专业*/}

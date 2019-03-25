@@ -1,0 +1,154 @@
+[
+    {
+        "name": "伦敦大学国王学院",
+        "checked": true
+    },
+    {
+        "name": "伦敦大学学院",
+        "checked": false
+    },
+    {
+        "name": "伦敦政经学院",
+        "checked": false
+    },
+    {
+        "name": "伯明翰大学",
+        "checked": false
+    },
+    {
+        "name": " 兰卡斯特大学",
+        "checked": false
+    },
+    {
+        "name":  "利兹大学",
+        "checked": false
+    },
+   {
+        "name":  "利物浦",
+        "checked":  false
+    } ,
+    {
+        "name":"华威大学",
+        "checked":  false
+    },
+    {
+        "name":"南安普顿大学",
+        "checked":  false
+    },
+    {
+        "name":"南洋理工大学",
+        "checked":  false
+    },
+    {
+        "name":"卡迪夫大学",
+        "checked":  false
+    },
+    {
+        "name":"巴斯大学",
+        "checked":  false
+    },
+    {
+        "name":"布里斯托大学",
+        "checked":  false
+    },
+    {
+        "name":"帝国理工学院",
+        "checked":  false
+    },
+    {
+        "name":"新加坡国立大学",
+        "checked":  false
+    },
+    {
+        "name":"新加坡管理大学",
+        "checked":  false
+    },
+    {
+        "name":"曼彻斯特大学",
+        "checked":  false
+    },
+    {
+        "name":"杜伦大学",
+        "checked":  false
+    },
+   {
+        "name":"格拉斯哥大学",
+        "checked":  false
+    },
+    {
+        "name":"澳门城市学院",
+        "checked":  false
+    },
+    {
+        "name":"澳门大学",
+        "checked":  false
+    },
+    {
+        "name":"澳门科技大学",
+        "checked":  false
+    },
+    {
+        "name":"爱丁堡大学",
+        "checked":  false
+    },
+    {
+        "name":"约克大学",
+      "checked": false
+    },
+    {
+        "name":"纽卡斯尔大学",
+        "checked": false
+    },
+    {
+        "name":"萨克塞斯",
+        "checked": false
+    },
+    {
+        "name":"诺丁汉大学",
+        "checked": false
+    },
+    {
+        "name":"谢菲尔德大学",
+        "checked": false
+    },
+    {
+        "name":"香港中文大学",
+        "checked": false
+    },
+    {
+        "name":"香港中文大学（深圳）",
+        "checked": false
+    },
+    {
+        "name":"香港公开大学",
+        "checked": false
+    },
+    {
+        "name":"香港城市大学",
+        "checked": false
+    },
+    {
+        "name":"香港大学",
+        "checked": false
+    },
+    {
+        "name":"香港岭南大学",
+        "checked": false
+    },
+    {
+        "name":"香港浸会大学",
+        "checked": false
+    },
+    {
+        "name":"香港演艺学院",
+        "checked": false
+    },
+    {
+        "name":"香港理工大学",
+        "checked": false
+    },
+    {
+        "name":"香港科技大学",
+        "checked": false
+    }
+]
