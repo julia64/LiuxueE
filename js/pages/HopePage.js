@@ -10,7 +10,7 @@ import Ambition from './choice/Ambition'
 
 const {height, width} = Dimensions.get('window');
 
-export default class MyPage extends Component{
+export default class HopePage extends Component{
     constructor(props){
         super(props);
     }
